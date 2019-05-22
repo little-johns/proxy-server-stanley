@@ -1,0 +1,11 @@
+config:
+  target: "http://localhost:3001"
+  phases:
+    - duration: 1
+      arrivalRate: 1
+  processor: './artilleryRandNum.js'
+scenarios:
+  - flow:
+      - function: 'makeNumbers'
+      - get:
+          url: "/id/{{ makeNumbers }}" 

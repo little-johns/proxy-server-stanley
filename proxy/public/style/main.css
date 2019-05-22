@@ -1,0 +1,12 @@
+#main-container {
+    display: flex;
+    margin: 0 140px;
+}
+
+#main-column {
+    flex-basis: 66%;
+}
+
+#minor-column {
+    flex-basis: 27.7%;
+}
