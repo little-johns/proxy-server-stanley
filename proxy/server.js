@@ -22,8 +22,6 @@ if (cluster.isMaster) {
   // Fork workers.
   for (let i = 0; i < numCPUs; i++) {
     cluster.fork();
-    // seems like to me that every time you create a new node cluster, its trying to bind to this port again
-    // which is taken. doesn't really make sense to me, but thats prob it
   }
 
   cluster.on('exit', (worker, code, signal) => {
@@ -33,7 +31,7 @@ if (cluster.isMaster) {
 
 app.get('/id/:query', (req, res) => {
 
-  client.get(req.params.query, function (error, result) {
+  client.get(req.params.query, (error, result) => {
     if (error) {
         console.log(error);
         throw error;
@@ -53,30 +51,6 @@ app.get('/id/:query', (req, res) => {
     }
   })
 })
-
-// axios.get(`http://localhost:5000/id/${req.params.query}`)
-
-// const chartReq = axios.create({
-//     baseURL: 'http://ec2-13-57-177-212.us-west-1.compute.amazonaws.com:2468/'
-//   });
-
-//   app.get('/api/:stockId', (req, res) => {
-//     chartReq.get(`api/${req.params.stockId}`)
-//     .then((response) => {
-//       res.send(response.data);
-//     })
-//   })
-
-//   const buyFormReq = axios.create({
-//       baseURL: 'http://ec2-3-84-115-167.compute-1.amazonaws.com:8080/' 
-//   });
-
-//   app.get('/stocks/:query', (req, res) => {
-//       buyFormReq.get(`stocks/${req.params.query}`)
-//       .then((response) => {
-//           res.send(response.data);
-//       })
-//   })
 
 app.listen(port, () => {
     console.log('Server is listening on port', port);
